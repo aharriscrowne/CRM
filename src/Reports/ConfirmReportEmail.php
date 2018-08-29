@@ -7,11 +7,6 @@
  *  description : Creates a email with all the confirmation letters asking member
  *                families to verify the information in the database.
  *
-
-
-
-
- *
  ******************************************************************************/
 
 require '../Include/Config.php';
@@ -23,6 +18,7 @@ use ChurchCRM\Reports\ChurchInfoReport;
 use ChurchCRM\Emails\FamilyVerificationEmail;
 use ChurchCRM\Utils\InputUtils;
 use ChurchCRM\Utils\RedirectUtils;
+use ChurchCRM\dto\SystemURLs;
 
 class EmailPDF_ConfirmReport extends ChurchInfoReport
 {
@@ -350,5 +346,5 @@ while ($aFam = mysqli_fetch_array($rsFamilies)) {
 if ($_GET['familyId']) {
     RedirectUtils::Redirect('FamilyView.php?FamilyID='.$_GET['familyId'].'&PDFEmailed='.$familyEmailSent);
 } else {
-    RedirectUtils::Redirect('FamilyList.php?AllPDFsEmailed='.$familiesEmailed);
+    RedirectUtils::Redirect(SystemURLs::getRootPath().'/v2/family?AllPDFsEmailed='.$familiesEmailed);
 }
